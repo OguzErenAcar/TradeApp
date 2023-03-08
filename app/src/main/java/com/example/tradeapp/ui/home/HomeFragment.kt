@@ -10,13 +10,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tradeapp.databinding.FragmentHomeBinding
 import com.example.tradeapp.ui.home.ads.adsRecyclerAdapter
+import com.example.tradeapp.ui.home.categories.categoryRecyclerAdapter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     private var Ads_adapter =adsRecyclerAdapter(arrayListOf())
+    private var Category_adapter =categoryRecyclerAdapter(arrayListOf())
+
     private var _binding: FragmentHomeBinding? = null
     private lateinit var homeViewModel:HomeViewModel
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -42,12 +48,28 @@ class HomeFragment : Fragment() {
         _binding!!.adsRecycler.adapter=Ads_adapter
         observeAds()
 
+
+        _binding!!.categoriesRecyler.layoutManager=object :LinearLayoutManager(context,HORIZONTAL,false)
+        {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
+        _binding!!.categoriesRecyler.adapter=Category_adapter
+        observeCategory()
+
         return root
     }
 
     fun observeAds(){
         homeViewModel.ads.observe(viewLifecycleOwner, Observer {
             Ads_adapter.updatelist(it)
+            //burda Ads_adapter.adsRecyclerAdapter(it) çalışmaması ?
+        })
+    }
+    fun observeCategory(){
+        homeViewModel.Category.observe(viewLifecycleOwner, Observer {
+            Category_adapter.updatelist(it)
             //burda Ads_adapter.adsRecyclerAdapter(it) çalışmaması ?
         })
     }

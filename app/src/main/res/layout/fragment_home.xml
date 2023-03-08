@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:background="@color/cl2"
-        android:id="@+id/catagories"
+        android:id="@+id/categoriesLL"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="top"
@@ -24,6 +24,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/adsRecycler"
         android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categoriesRecyler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
     </LinearLayout>
 
 
@@ -34,7 +41,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/catagories" />
+        app:layout_constraintTop_toBottomOf="@id/categoriesLL" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
